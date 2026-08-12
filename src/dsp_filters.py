@@ -20,7 +20,6 @@ def bandpass_filter(sampling_freq, f_nyq, original_signal):
     # zero phase filtering
     filtered_signal = signal.filtfilt(b, a, original_signal)
     filtered_signal = signal.filtfilt(b_band, a_band, filtered_signal)
-    print(filtered_signal[:30])
 
     # validate in frequency domain
     f_raw, Pxx_raw = signal.welch(original_signal, fs=sampling_freq, nperseg=1024)

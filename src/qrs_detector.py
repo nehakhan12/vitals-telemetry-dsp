@@ -50,8 +50,6 @@ def adaptive_peak_detection(integrated, sampling_freq, cleaned_signal):
     local_max_times = np.where(greater_than_left & greater_than_right)[0] + 1
     local_max_heights = arr[local_max_times]
 
-    print(local_max_times[:5], local_max_heights[:5])
-
     # initialize values for spki (signal level) and npki (noise level)
     spki = np.max(local_max_heights[:5]) * 0.35  # sets to 35% of the max peak height of the first few seconds
     npki = np.mean(local_max_heights) * 0.1  # sets noise level to be 10% of the avg peak height
@@ -75,14 +73,12 @@ def adaptive_peak_detection(integrated, sampling_freq, cleaned_signal):
     
     # using the accepted timestamps, find the max voltage value within the window for actual r peaks
     r_peaks = [] # to store the indeces of the max r_peaks
-    print("accepted timstamps", accepted_timestamps)
     for i in accepted_timestamps:
         if i > 25 and i < len(cleaned_signal) - 30:
             r = np.argmax(cleaned_signal[i - 25: i + 30])
             r = i - 25 + r
             r_peaks.append(r)
 
-    print(r_peaks[:11])
     return r_peaks
 
 
@@ -103,9 +99,7 @@ def check_expert_annotations(r_peaks, record_name='100'):
             true_positives += 1
 
     sensitivity = (true_positives / len(expert_timestamps)) * 100
-    print(
-        f"Detected {true_positives}/{len(expert_timestamps)} annotated beats."
-    )
+    
     return sensitivity
 
 

@@ -1,5 +1,4 @@
 # Real-Time ECG Telemetry & Arrhythmia Dashboard
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -10,7 +9,7 @@ from src.qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
 from src.alarm_engine import clinical_status_flags
 
 
-def prepare_pipeline_data(record_name="105", sample_limit=108000):
+def prepare_pipeline_data(record_name="100", sample_limit=108000):
     # runs signal processing pipeline and extracts raw metrics for telemetry
     raw_signal, fs = load_ecg_record(record_name, sample_limit=sample_limit)
 
@@ -34,9 +33,9 @@ def prepare_pipeline_data(record_name="105", sample_limit=108000):
 
 
 def run_animated_dashboard():
-    # Run preprocessing via pipeline helper (Record 105)
+    # Run preprocessing via pipeline helper 
     clean_ecg, fs, raw_rr_intervals, raw_bpm, peak_times_sec, median_rr = (
-        prepare_pipeline_data(record_name="105", sample_limit=108000)
+        prepare_pipeline_data(record_name="100", sample_limit=108000)
     )
 
     total_time_sec = len(clean_ecg) / fs
@@ -46,7 +45,7 @@ def run_animated_dashboard():
     fig, (ax1, ax2) = plt.subplots(
         2, 1, figsize=(11, 6), gridspec_kw={"height_ratios": [2.5, 1]}
     )
-    fig.canvas.manager.set_window_title("MIT-BIH Record 105 - Live ECG Telemetry Monitor")
+    fig.canvas.manager.set_window_title("MIT-BIH Record 100 - Live ECG Telemetry Monitor")
 
     window_size_sec = 5.0
 
@@ -55,7 +54,7 @@ def run_animated_dashboard():
     line_bpm, = ax2.plot([], [], lw=1.8, color="#2ca02c", label="Instantaneous BPM")
 
     ax1.set_ylabel("Voltage (mV)")
-    ax1.set_title("Live ECG Signal & Peak Detection (Record 105)")
+    ax1.set_title("Live ECG Signal & Peak Detection (Record 100)")
     ax1.grid(True, linestyle="--", alpha=0.5)
     ax1.set_ylim(np.min(clean_ecg) - 0.2, np.max(clean_ecg) + 0.3)
     ax1.legend(loc="upper left")

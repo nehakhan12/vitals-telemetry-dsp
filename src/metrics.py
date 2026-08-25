@@ -1,59 +1,10 @@
-from scipy import signal
 import numpy as np
 from data_loader import load_ecg_record
 from dsp_filters import bandpass_filter
 from qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
 import matplotlib.pyplot as plt
-import wfdb
-
-"""
-def calculate_metrics(fs, r_peaks):
-    # calculate RR-intervals in ms
-    # time_diff = (sample(n) - sample(n-1)) * (1000/fs)
-    # find instantaneous heart rates (bpm)
-    rr_intervals = []
-    bpm = []
-    for i in range(1, len(r_peaks)):
-        time_diff = (r_peaks[i]-r_peaks[i-1]) * (1000/fs)
-        rr_intervals.append(time_diff)
-        bpm.append(60000/time_diff)
-
-    # find heart rate variability via standard deviation of rr_intervals
-    # use a 30 second window, taking r_peaks only within that window
-    sdnn = []
-    rmssd = []
-    window_times = []
-    peak_times_sec = np.array(r_peaks[1:]) / fs  # convert peak positions to time (seconds)
-    rr_intervals_arr = np.array(rr_intervals)
-    total_duration = int(peak_times_sec[-1]) # in seconds
-
-    valid_mask = (rr_intervals_arr >= 300) & (rr_intervals_arr <= 1500)
-    median_rr = np.median(rr_intervals_arr)
-    valid_mask = np.abs(rr_intervals_arr - median_rr) / median_rr <= 0.20
-
-    rr_intervals_arr = rr_intervals_arr[valid_mask]
-    peak_times_sec = peak_times_sec[valid_mask]
-    bpm = np.array(bpm)[valid_mask]
-
-    # 30 second intervals sliding window
-    for start_time in range(0, total_duration - 29, 1):
-        end_time = start_time + 30
-
-        mask = (peak_times_sec >= start_time) & (peak_times_sec < end_time)
-        window_intervals = rr_intervals_arr[mask]
-
-        # check if theres more than 1 heartbeat
-        if len(window_intervals) > 1:
-            sdnn.append(np.std(window_intervals))
-            diffs = np.diff(window_intervals)
-            rmssd.append(np.sqrt(np.mean(diffs**2)))
-
-            # track the midpoint of the window for plot time alignment
-            window_times.append(start_time + 15)
 
 
-    return rr_intervals, bpm, sdnn, rmssd, window_times, peak_times_sec
-"""
 def calculate_metrics(fs, r_peaks):
     rr_intervals = []
     bpm = []
@@ -119,7 +70,6 @@ if __name__ == "__main__":
 
     rr_intervals, bpm, sdnn, rmssd, window_times, peak_times_sec = calculate_metrics(fs, r_peaks)
 
-    #peak_times_sec = np.array(r_peaks[1:]) / fs
 
     # Console Output Summary 
     print("\n" + "="*45)

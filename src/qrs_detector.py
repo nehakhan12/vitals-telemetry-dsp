@@ -2,8 +2,8 @@
 # overall, makes the QRS segments a lot more 'visible' and extra parts are reduced to near zero
 from scipy import signal
 import numpy as np
-from data_loader import load_ecg_record
-from dsp_filters import bandpass_filter
+from .data_loader import load_ecg_record
+from .dsp_filters import bandpass_filter
 import matplotlib.pyplot as plt
 import wfdb
 

@@ -1,7 +1,7 @@
 import numpy as np
-from data_loader import load_ecg_record
-from dsp_filters import bandpass_filter
-from qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
+from .data_loader import load_ecg_record
+from .dsp_filters import bandpass_filter
+from .qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
 import matplotlib.pyplot as plt
 
 

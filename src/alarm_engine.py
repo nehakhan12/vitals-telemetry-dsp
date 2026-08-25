@@ -1,10 +1,10 @@
 # this file triggers alarms based on automated thresholds to find heart anomalies
 
 import numpy as np
-from data_loader import load_ecg_record
-from dsp_filters import bandpass_filter
-from qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
-from metrics import calculate_metrics
+from .data_loader import load_ecg_record
+from .dsp_filters import bandpass_filter
+from .qrs_detector import pan_tompkins_preprocessing, adaptive_peak_detection
+from .metrics import calculate_metrics
 import matplotlib.pyplot as plt
 
 

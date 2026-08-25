@@ -3,7 +3,7 @@
 # will essentially cutoff outlier data according to an upper and lower threshold
 
 from scipy import signal
-from data_loader import load_ecg_record
+from .data_loader import load_ecg_record
 import matplotlib.pyplot as plt
 import numpy as np
 

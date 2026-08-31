@@ -65,7 +65,7 @@ if __name__ == "__main__":
         clean_ecg, fs
     )
 
-    # 3. run peak detection & evaluation before plotting
+    # run peak detection & evaluation before plotting
     r_peaks = adaptive_peak_detection(integrated, fs, clean_ecg)
 
     rr_intervals, bpm, sdnn, rmssd, window_times, peak_times_sec = calculate_metrics(fs, r_peaks)
